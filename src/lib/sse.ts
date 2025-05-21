@@ -1,0 +1,21 @@
+// src/lib/sse.ts
+import { edgeDeviceConfig } from "./config";
+
+export function initSSE(onMessage: (data: any) => void) {
+  const eventSource = new EventSource(
+    `${edgeDeviceConfig.backendUrl}/events/${edgeDeviceConfig.name}`
+  );
+
+  eventSource.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+    console.log("[SSE] Received message:", data);
+    onMessage(data);
+  };
+
+  eventSource.onerror = (err) => {
+    console.error("SSE error:", err);
+    eventSource.close();
+  };
+
+  return eventSource;
+}
