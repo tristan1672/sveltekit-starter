@@ -8,7 +8,7 @@
   import FlightView from "./flight/FlightView.svelte";
   import IncomingView from "./incoming/IncomingView.svelte";
 
-  export let data;
+  //export let data;
   let currentView: string = "gate";
 
   function getComponent(view: string) {
@@ -23,10 +23,11 @@
   }
 
   onMount(() => {
-    initializeEdgeDevice((data) => {
-      console.log("Received SSE:", data);
-      // Optional: update your cache or view here
-    });
+    if (typeof window !== "undefined") {
+      initializeEdgeDevice((data) => {
+        console.log("Received SSE:", data);
+      });
+    }
 
     const interval = setInterval(() => {
       currentView = getCache().currentView;
@@ -37,3 +38,4 @@
 </script>
 
 <svelte:component this={getComponent(currentView)} />
+<slot />

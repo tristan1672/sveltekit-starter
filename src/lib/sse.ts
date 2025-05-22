@@ -6,6 +6,7 @@ export function initSSE(onMessage: (data: any) => void) {
     `${edgeDeviceConfig.backendUrl}/events/${edgeDeviceConfig.name}`
   );
 
+  eventSource.onopen = () => console.log("SSE connection opened");
   eventSource.onmessage = (event) => {
     const data = JSON.parse(event.data);
     console.log("[SSE] Received message:", data);
