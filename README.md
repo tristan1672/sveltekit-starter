@@ -16,42 +16,21 @@ rabbit mq - ran on docker
 event input interface: https://github.com/tristan1672/threejs_starter/tree/ED-Input - ran locally
 
 Description:
-*Branch specific
 -frontend client registration (POST)
 -SSE event routing to clients (GET)
--client management
--consumer management, queue construction and client mapping to queue
 
-Database:
-PostgreSQL
-
-Backend:
-Express + Node
-
-Frontend:![Inter-project Communications-Simple drawio](https://github.com/user-attachments/assets/82e013b3-6a4f-486c-a3a9-ea063ae41910)
-
-React
+Frontend:
+svelte sveltekit
 
 Prerequisites
--Node.js
 -npm or yarn
--PostgreSQL
--Docker
+-sveltekit
 
 How to Run:
 - clone this repository
-- npm install or yarn install in /backend and /frontend directories
-- npm run build in folders /backend and /frontend
-- Run Docker desktop
-- in the source directory /pern, run docker compose up --build
-
-  *Branch Specific
-- Ensure rabbitMQ is running on docker. install rabbitmq and run with docker run -d --hostname rabbitmq --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management
-- Since runnning on docker, check ipconfg in cmd for public address
-- Populate amqp.connect("amqp:<your public address>:5672"); ensure formatting, example: "amqp://192.168.6.122:5672"
-- Ensure backend connects to rabbitMQ
-- clone sveltekit-starter and run locally, ensure .env file backend_url=http://<your public address>:5000 as this current project is ran on docker
-
+- npm install
+- npm run dev
+- clone sveltekit-starter and run locally, ensure .env file backend_url=http://localhost:5000
 
 
 **Diagram**
