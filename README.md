@@ -1,38 +1,59 @@
-# sv
+# sveltekit-starter - ED-Web branch
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A sveltekit frontend meant to act as an edge device that is subscribed to events in the input
+interface through messages forwarded by the ED-Server. 
+This branch is part of a proof of concept implementation that shows inter-project communication.
+This project serves as a backend server in a 4-part communication line. It contains local config files
+that determines the topics it will be subscribed to.
 
-## Creating a project
+Inter-project communication POC
+frontend edge device: https://github.com/tristan1672/sveltekit-starter/tree/ED-Web - running locally
 
-If you're seeing this, you've probably already done this step. Congrats!
+backend conduit server: https://github.com/tristan1672/PERN-Docker-Project/tree/ED-Server - ran on docker
 
-```bash
-# create a new project in the current directory
-npx sv create
+rabbit mq - ran on docker
 
-# create a new project in my-app
-npx sv create my-app
-```
+event input interface: https://github.com/tristan1672/threejs_starter/tree/ED-Input - ran locally
 
-## Developing
+Description:
+*Branch specific
+-frontend client registration (POST)
+-SSE event routing to clients (GET)
+-client management
+-consumer management, queue construction and client mapping to queue
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Database:
+PostgreSQL
 
-```bash
-npm run dev
+Backend:
+Express + Node
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+Frontend:![Inter-project Communications-Simple drawio](https://github.com/user-attachments/assets/82e013b3-6a4f-486c-a3a9-ea063ae41910)
 
-## Building
+React
 
-To create a production version of your app:
+Prerequisites
+-Node.js
+-npm or yarn
+-PostgreSQL
+-Docker
 
-```bash
-npm run build
-```
+How to Run:
+- clone this repository
+- npm install or yarn install in /backend and /frontend directories
+- npm run build in folders /backend and /frontend
+- Run Docker desktop
+- in the source directory /pern, run docker compose up --build
 
-You can preview the production build with `npm run preview`.
+  *Branch Specific
+- Ensure rabbitMQ is running on docker. install rabbitmq and run with docker run -d --hostname rabbitmq --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management
+- Since runnning on docker, check ipconfg in cmd for public address
+- Populate amqp.connect("amqp:<your public address>:5672"); ensure formatting, example: "amqp://192.168.6.122:5672"
+- Ensure backend connects to rabbitMQ
+- clone sveltekit-starter and run locally, ensure .env file backend_url=http://<your public address>:5000 as this current project is ran on docker
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+
+
+**Diagram**
+![Inter-project Communications-Simple drawio](https://github.com/user-attachments/assets/c3656a16-d4ad-49a1-a116-29731f1fcce3)
+
