@@ -55,5 +55,6 @@ How to Run:
 
 
 **Diagram**
-![Inter-project Communications-Simple drawio](https://github.com/user-attachments/assets/c3656a16-d4ad-49a1-a116-29731f1fcce3)
+![Inter-project Communications-sveltekit-starter focus drawio](https://github.com/user-attachments/assets/f4a55bda-1e08-41ac-a7bd-c3a863fd96ed)
+
 
